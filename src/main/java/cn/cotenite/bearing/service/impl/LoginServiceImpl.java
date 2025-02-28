@@ -45,7 +45,7 @@ public class LoginServiceImpl extends ServiceImpl<UserMapper, User> implements L
         String verCode = specCaptcha.text().toLowerCase();
         String snowId= SnowFlakUtil.getSnowFlakeId();
         String key = RedisKeyUtil.buildCaptchaKey(snowId);
-        log.info("生成验证码：keu:{},word:{}",key,verCode);
+        log.info("生成验证码：key:{},word:{}",key,verCode);
         redisTemplate.opsForValue().set(key,verCode,3, TimeUnit.MINUTES);
         return CaptchaVO.builder()
                 .key(snowId)
@@ -61,7 +61,8 @@ public class LoginServiceImpl extends ServiceImpl<UserMapper, User> implements L
         }
 
         String code = (String) redisTemplate.opsForValue().get(captchaKey);
-        if (!StrUtil.equals(code, loginReqVO.getCode())){
+        if (!StrUtil.equals(code, loginReqVO.getCode().toLowerCase())){
+            log.error("用户传入验证码错误，key：{}，code:{}",captchaKey,loginReqVO.getCode());
             throw new BizException(ResponseErrorEnum.CAPTCHA_ERROR);
         }
 
