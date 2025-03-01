@@ -9,6 +9,7 @@ import cn.cotenite.bearing.domain.vo.rsp.PageRspVO;
 import cn.cotenite.bearing.service.BearingStatusService;
 import cn.cotenite.bearing.service.impl.BearingStatusServiceImpl;
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ import java.util.List;
  * @Description
  * @Date 3/1/2025 9:07 PM
  */
-@SaCheckLogin
+
 @RestController
 @RequestMapping("/bearingStatus")
 public class BearingStatusController {
@@ -35,6 +36,7 @@ public class BearingStatusController {
     }
 
     @PostMapping("/list")
+    @SaCheckLogin
     private Response<PageRspVO<?>> list(@Validated PageReqVO pageVO){
         PageRspVO<BearingStatusRspVO> pageRspVO = bearingStatusService.list(pageVO);
         return Response.success(pageRspVO);
