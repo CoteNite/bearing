@@ -50,3 +50,10 @@ sa-token:
   # 是否输出操作日志
   is-log: true
   token-prefix: Bearer
+
+logging:
+  #logging.level是map类型, 我们可以指定不同包下使用不同的日志级别
+  level:
+    cn.cotenite.bearing.mapper: debug
+  config: classpath:logback-spring.xml
+
