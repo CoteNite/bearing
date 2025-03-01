@@ -1,4 +1,4 @@
-package cn.cotenite.bearing.common.utils;
+package cn.cotenite.bearing.utils;
 
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
@@ -13,6 +13,11 @@ public class SnowFlakUtil {
     public static String getSnowFlakeId(){
         Snowflake secondSnow = IdUtil.getSnowflake(1,1);
         return secondSnow.nextIdStr();
+    }
+
+    public static Long getSnowFlakeIdLong(){
+        Snowflake secondSnow = IdUtil.getSnowflake(1,1);
+        return secondSnow.nextId();
     }
 
 }

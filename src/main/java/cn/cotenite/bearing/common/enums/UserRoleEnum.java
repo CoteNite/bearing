@@ -3,9 +3,6 @@ package cn.cotenite.bearing.common.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @Author RichardYoung
  * @Description
@@ -17,21 +14,33 @@ public enum UserRoleEnum {
 
     SUPER_ADMIN(0,"superAdmin"),
     ADMIN(1,"admin"),
-    USER(2,"user")
+    WORKER(2,"user")
     ;
 
     private int code;
-    private String role;
+    private String docs;
 
-    public static String getUserRole(int code){
+
+    public static UserRoleEnum getUserRoleByCode(int code){
         UserRoleEnum[] values = UserRoleEnum.values();
         for (UserRoleEnum item:values){
             if (item.getCode()==code){
-                return item.getRole();
+                return item;
             }
         }
         return null;
     }
+
+    public static UserRoleEnum getUserRoleByDocs(String docs){
+        UserRoleEnum[] values = UserRoleEnum.values();
+        for (UserRoleEnum item:values){
+            if (item.getDocs().equals(docs)){
+                return item;
+            }
+        }
+        return null;
+    }
+
 
     public static Boolean checkCurrentRoleIsSuperAdmin(int code){
         return code==SUPER_ADMIN.getCode();

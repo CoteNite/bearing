@@ -16,9 +16,13 @@ public class UserAddAndUpdateReqVO {
     @NotBlank
     private String username;
     @NotBlank
-    private String nickname;
+    private String realName;
     @NotBlank
     private String password;
+    @NotBlank
+    private String startWorkTime;
+    @NotBlank
+    private String getOffWorkTime;
     @NotNull
     private Integer role;
 

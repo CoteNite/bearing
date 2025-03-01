@@ -12,9 +12,9 @@ import lombok.Data;
  * 
  * @TableName bearing_status
  */
-@TableName(value ="bearing_status")
+@TableName(value ="bearing_wrong")
 @Data
-public class BearingStatus implements Serializable {
+public class BearingWrong implements Serializable {
     /**
      * 
      */
@@ -35,8 +35,6 @@ public class BearingStatus implements Serializable {
      * 错误类型
      */
     private Integer wrong;
-
-    private String nickname;
 
     /**
      * 
@@ -67,7 +65,7 @@ public class BearingStatus implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        BearingStatus other = (BearingStatus) that;
+        BearingWrong other = (BearingWrong) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getBearingId() == null ? other.getBearingId() == null : this.getBearingId().equals(other.getBearingId()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))

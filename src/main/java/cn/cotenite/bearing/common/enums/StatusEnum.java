@@ -12,8 +12,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StatusEnum {
 
-    YES(0,"尚未分配工人"),
-    NO(1,"工人正在去维修"),
+    WAITING(0,"尚未分配工人"),
+    PARING(1,"工人正在去维修"),
     FINISHED(2,"维修已完成")
     ;
 

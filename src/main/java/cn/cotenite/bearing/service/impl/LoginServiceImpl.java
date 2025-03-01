@@ -3,8 +3,8 @@ package cn.cotenite.bearing.service.impl;
 import cn.cotenite.bearing.common.enums.ResponseErrorEnum;
 import cn.cotenite.bearing.common.enums.UserRoleEnum;
 import cn.cotenite.bearing.common.expection.BizException;
-import cn.cotenite.bearing.common.utils.RedisKeyUtil;
-import cn.cotenite.bearing.common.utils.SnowFlakUtil;
+import cn.cotenite.bearing.utils.RedisKeyUtil;
+import cn.cotenite.bearing.utils.SnowFlakUtil;
 import cn.cotenite.bearing.domain.po.User;
 import cn.cotenite.bearing.domain.vo.req.LoginReqVO;
 import cn.cotenite.bearing.domain.vo.rsp.CaptchaVO;
@@ -74,13 +74,14 @@ public class LoginServiceImpl extends ServiceImpl<UserMapper, User> implements L
             throw new BizException(ResponseErrorEnum.USER_NOT_FOUND);
         }
 
+
         if(!BCrypt.checkpw(loginReqVO.getPassword(),user.getPassword())){
             throw new BizException(ResponseErrorEnum.PASSWORD_OR_USERNAME_FAILURE);
         }
 
-        String role=UserRoleEnum.getUserRole(user.getRole());
+        UserRoleEnum userRole=UserRoleEnum.getUserRoleByCode(user.getRole());
 
-        if (role==null){
+        if (userRole==null){
             throw new BizException(ResponseErrorEnum.SYSTEM_ERROR);
         }
 
@@ -91,8 +92,8 @@ public class LoginServiceImpl extends ServiceImpl<UserMapper, User> implements L
 
 
         return LoginRspVO.builder()
-                .nickname(user.getNickname())
-                .role(role)
+                .nickname(user.getRealName())
+                .role(userRole.getDocs())
                 .token(StpUtil.getTokenInfo().getTokenValue())
                 .build();
     }

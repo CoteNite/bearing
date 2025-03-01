@@ -30,8 +30,10 @@ public class UserController {
     }
 
     @PostMapping("/update")
+    @SaCheckRole({"admin","superAdmin"})
     public Response<Void> updateUser(@RequestBody UserAddAndUpdateReqVO reqVO){
         userService.updateUser(reqVO);
         return Response.success();
     }
+
 }
