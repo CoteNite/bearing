@@ -6,6 +6,7 @@ import cn.cotenite.bearing.domain.vo.req.BearingStatusReqVO;
 import cn.cotenite.bearing.domain.vo.req.PageReqVO;
 import cn.cotenite.bearing.domain.vo.rsp.BearingStatusRspVO;
 import cn.cotenite.bearing.domain.vo.rsp.PageRspVO;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.cotenite.bearing.domain.po.BearingStatus;
@@ -40,7 +41,7 @@ public class BearingStatusServiceImpl extends ServiceImpl<BearingStatusMapper, B
     @Override
     public PageRspVO<BearingStatusRspVO> list(PageReqVO pageVO) {
         Page<BearingStatus> page=new Page<>(pageVO.getPageCurrent(),pageVO.getPageSize());
-        Page<BearingStatus> bearingStatusPage = bearingStatusMapper.selectPage(page, null);
+        Page<BearingStatus> bearingStatusPage = bearingStatusMapper.selectPage(page, null).addOrder(OrderItem.desc("update_time"));
         List<BearingStatus> records = bearingStatusPage.getRecords();
         List<BearingStatusRspVO> list=new ArrayList<>();
         for (BearingStatus item:records){

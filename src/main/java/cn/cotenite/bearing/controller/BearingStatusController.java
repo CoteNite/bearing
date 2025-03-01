@@ -35,7 +35,7 @@ public class BearingStatusController {
         return Response.success();
     }
 
-    @PostMapping("/list")
+    @GetMapping("/list")
     @SaCheckLogin
     private Response<PageRspVO<?>> list(@Validated PageReqVO pageVO){
         PageRspVO<BearingStatusRspVO> pageRspVO = bearingStatusService.list(pageVO);

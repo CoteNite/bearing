@@ -18,7 +18,7 @@ import java.util.List;
 @Builder
 public class PageRspVO<T> {
 
-    private Long pageNo;
+    private Long pageCurrent;
 
     private Long pageSize;
 

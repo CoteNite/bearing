@@ -30,7 +30,7 @@ public class BearingStatusRspVO {
 
     private String nickname;
 
-    private Date createTime;
+    private Date updateTime;
 
 
 }
