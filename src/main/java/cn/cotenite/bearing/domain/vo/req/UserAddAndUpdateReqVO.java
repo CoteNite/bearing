@@ -1,10 +1,9 @@
 package cn.cotenite.bearing.domain.vo.req;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.util.Date;
 
 /**
  * @Author RichardYoung
@@ -12,17 +11,15 @@ import java.util.Date;
  * @Date 2/28/2025 9:20 PM
  */
 @Data
-public class UserAddReqVO {
+public class UserAddAndUpdateReqVO {
 
-
-    private Long id;
-
+    @NotBlank
     private String username;
-
+    @NotBlank
     private String nickname;
-
+    @NotBlank
     private String password;
-
+    @NotNull
     private Integer role;
 
 }

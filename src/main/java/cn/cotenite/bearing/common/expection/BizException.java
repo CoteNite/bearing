@@ -14,23 +14,15 @@ public class BizException extends RuntimeException{
     @Serial
     private static final long serialVersionUID = -7864604160297181941L;
 
-    private final int code;
 
     private final String message;
 
-    public  BizException(int code, String message) {
-        this.code=code;
+    public  BizException( String message) {
         this.message=message;
     }
 
     public BizException(ResponseErrorEnum errorEnum){
-        this.code= Integer.parseInt(errorEnum.getErrorCode());
         this.message=errorEnum.getErrorMessage();
-    }
-
-
-    public int getCode() {
-        return code;
     }
 
     public String getMsg() {

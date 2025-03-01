@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Response<Void> handleException(HttpServletRequest request, BizException e) {
         log.error("{} 请求发生业务错误，错误原因：{}",request.getRequestURI(),e.getMsg());
-        return Response.failure(e.getCode(),e.getMsg());
+        return Response.failure(200,e.getMsg());
     }
 
     @ExceptionHandler({Exception.class})

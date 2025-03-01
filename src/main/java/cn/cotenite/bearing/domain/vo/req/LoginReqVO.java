@@ -15,12 +15,17 @@ public class LoginReqVO {
 
     @NotEmpty
     private String username;
+
     @NotEmpty
     private String password;
+
     @NotEmpty
     private String key;
+
     @NotEmpty
     @Length(min = 4,max = 4)
     private String code;
+
+    private Boolean rememberMe;
 
 }

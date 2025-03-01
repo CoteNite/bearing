@@ -42,7 +42,7 @@ public class Response<T> {
     }
 
     public static <T> Response<T> failure(BizException e) {
-        return new Response<>(e.getCode(),null,e.getMessage());
+        return new Response<>(200,null,e.getMessage());
     }
 
     public static <T> Response<T> failure(ResponseErrorEnum error) {

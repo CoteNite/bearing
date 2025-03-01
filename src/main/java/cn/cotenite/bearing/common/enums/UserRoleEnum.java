@@ -15,8 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 public enum UserRoleEnum {
 
-    ADMIN(0,"admin"),
-    USER(1,"user")
+    SUPER_ADMIN(0,"superAdmin"),
+    ADMIN(1,"admin"),
+    USER(2,"user")
     ;
 
     private int code;
@@ -32,12 +33,7 @@ public enum UserRoleEnum {
         return null;
     }
 
-    public static List<String> getAllRole(){
-        List<String> list=new ArrayList<>();
-        UserRoleEnum[] values = UserRoleEnum.values();
-        for (UserRoleEnum item:values){
-            list.add(item.getRole());
-        }
-        return list;
+    public static Boolean checkCurrentRoleIsSuperAdmin(int code){
+        return code==SUPER_ADMIN.getCode();
     }
 }
