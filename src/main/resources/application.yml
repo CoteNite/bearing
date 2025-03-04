@@ -57,3 +57,4 @@ logging:
     cn.cotenite.bearing.mapper: debug
   config: classpath:logback-spring.xml
 
+test: 123
