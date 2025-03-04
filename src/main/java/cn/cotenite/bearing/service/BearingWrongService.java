@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface BearingWrongService extends IService<BearingWrong> {
 
+
     void addBearingStatus(BearingStatusReqVO reqVO);
 
     PageRspVO<BearingStatusRspVO> list(PageReqVO pageVO);
