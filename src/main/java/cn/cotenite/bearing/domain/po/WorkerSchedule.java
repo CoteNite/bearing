@@ -1,11 +1,16 @@
 package cn.cotenite.bearing.domain.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 
@@ -13,11 +18,14 @@ import lombok.Data;
  */
 @TableName(value ="worker_schedule")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class WorkerSchedule implements Serializable {
     /**
      * 
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**

@@ -11,7 +11,6 @@ import cn.cotenite.bearing.domain.vo.rsp.CaptchaVO;
 import cn.cotenite.bearing.domain.vo.rsp.LoginRspVO;
 import cn.cotenite.bearing.mapper.UserMapper;
 import cn.cotenite.bearing.service.LoginService;
-import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -68,7 +67,7 @@ public class LoginServiceImpl extends ServiceImpl<UserMapper, User> implements L
         }
 
 
-        User user = userMapper.selectUserById(loginReqVO.getUsername());
+        User user = userMapper.selectUserByUsername(loginReqVO.getUsername());
 
         if(user==null){
             throw new BizException(ResponseErrorEnum.USER_NOT_FOUND);
@@ -85,11 +84,7 @@ public class LoginServiceImpl extends ServiceImpl<UserMapper, User> implements L
             throw new BizException(ResponseErrorEnum.SYSTEM_ERROR);
         }
 
-
-        StpUtil.login(user.getId(),loginReqVO.getRememberMe()
-                ? new SaLoginModel().setTimeout(60 * 60 * 24 * 7)
-                : null);
-
+        StpUtil.login(user.getId(),loginReqVO.getRememberMe());
 
         return LoginRspVO.builder()
                 .nickname(user.getRealName())

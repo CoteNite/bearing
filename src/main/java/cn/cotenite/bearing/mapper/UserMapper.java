@@ -17,7 +17,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 
-    User selectUserById(@Param("username") String username);
+    User selectUserByUsername(@Param("username") String username);
 
     List<User> selectAllUser4Redis();
 }

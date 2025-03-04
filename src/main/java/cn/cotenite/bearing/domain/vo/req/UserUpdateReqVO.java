@@ -2,28 +2,32 @@ package cn.cotenite.bearing.domain.vo.req;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 
 /**
  * @Author RichardYoung
  * @Description
- * @Date 2/28/2025 9:20 PM
+ * @Date 3/5/2025 7:10 AM
  */
 @Data
-public class UserAddAndUpdateReqVO {
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class UserUpdateReqVO {
 
     @NotBlank
+    private String id;
+
     private String username;
-    @NotBlank
-    private String realName;
-    @NotBlank
-    private String password;
-    @NotBlank
-    private String startWorkTime;
-    @NotBlank
-    private String getOffWorkTime;
-    @NotNull
-    private Integer role;
 
+    private String realName;
+
+    private String password;
+
+    private Integer scheduleId;
+
+    private Integer role;
 }
