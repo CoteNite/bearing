@@ -1,5 +1,6 @@
 package cn.cotenite.bearing.domain.vo.req;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,8 +21,10 @@ import java.time.LocalTime;
 public class ScheduleAddVO {
 
     @NotNull
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime startTime;
 
     @NotNull
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime getOffTime;
 }

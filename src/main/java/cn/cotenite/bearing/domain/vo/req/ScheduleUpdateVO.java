@@ -1,5 +1,6 @@
 package cn.cotenite.bearing.domain.vo.req;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +23,9 @@ public class ScheduleUpdateVO {
     @NotNull
     private Long id;
 
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime startTime;
 
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime getOffTime;
 }

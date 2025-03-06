@@ -45,7 +45,7 @@ public class ScheduleController {
 
     @SaCheckRole(value = {"admin","superAdmin"},mode = SaMode.OR)
     @PostMapping("/add")
-    public Response<Void> add(@Validated @NotNull ScheduleAddVO addVO){
+    public Response<Void> add(@Validated  @RequestBody ScheduleAddVO addVO){
         Schedule schedule=new Schedule();
         BeanUtils.copyProperties(addVO,schedule);
         scheduleService.save(schedule);
@@ -54,7 +54,7 @@ public class ScheduleController {
 
     @SaCheckRole(value = {"admin","superAdmin"},mode = SaMode.OR)
     @PostMapping("/update")
-    public Response<Void> update(ScheduleUpdateVO updateVO){
+    public Response<Void> update(@Validated  @RequestBody ScheduleUpdateVO updateVO){
         Schedule schedule=new Schedule();
         BeanUtils.copyProperties(updateVO,schedule);
         scheduleService.updateById(schedule);
