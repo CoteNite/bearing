@@ -3,6 +3,7 @@ package cn.cotenite.bearing.service;
 import cn.cotenite.bearing.domain.po.User;
 import cn.cotenite.bearing.domain.vo.req.UserAddReqVO;
 import cn.cotenite.bearing.domain.vo.req.UserUpdateReqVO;
+import cn.cotenite.bearing.domain.vo.rsp.UserDetailVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +12,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @Date 2/28/2025 9:17 PM
  */
 public interface UserService extends IService<User> {
+
+    UserDetailVO getDetailById(Long id);
 
     void addUser(UserAddReqVO reqVO);
 

@@ -1,8 +1,10 @@
 package cn.cotenite.bearing.controller;
 
 import cn.cotenite.bearing.common.response.Response;
+import cn.cotenite.bearing.domain.po.User;
 import cn.cotenite.bearing.domain.vo.req.UserAddReqVO;
 import cn.cotenite.bearing.domain.vo.req.UserUpdateReqVO;
+import cn.cotenite.bearing.domain.vo.rsp.UserDetailVO;
 import cn.cotenite.bearing.service.UserService;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.annotation.SaCheckRole;
@@ -23,6 +25,12 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    @GetMapping("/get")
+    public Response<UserDetailVO> get(@RequestParam Long id){
+        UserDetailVO detailVO=userService.getDetailById(id);
+        return Response.success(detailVO);
+    }
 
     @PostMapping("/add")
     @SaCheckRole(value = {"admin","superAdmin"},mode = SaMode.OR)

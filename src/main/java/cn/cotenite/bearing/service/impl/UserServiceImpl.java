@@ -6,6 +6,7 @@ import cn.cotenite.bearing.common.expection.BizException;
 import cn.cotenite.bearing.domain.dto.UserRedisDTO;
 import cn.cotenite.bearing.domain.po.WorkerSchedule;
 import cn.cotenite.bearing.domain.vo.req.UserUpdateReqVO;
+import cn.cotenite.bearing.domain.vo.rsp.UserDetailVO;
 import cn.cotenite.bearing.holder.UserRoleHolder;
 import cn.cotenite.bearing.domain.po.User;
 import cn.cotenite.bearing.domain.vo.req.UserAddReqVO;
@@ -42,6 +43,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
 
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
+
+    @Override
+    public UserDetailVO getDetailById(Long id) {
+        return userMapper.selectDetailById(id);
+    }
 
     @Override
     public void addUser(UserAddReqVO reqVO) {

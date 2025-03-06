@@ -2,6 +2,7 @@ package cn.cotenite.bearing.mapper;
 
 
 import cn.cotenite.bearing.domain.po.User;
+import cn.cotenite.bearing.domain.vo.rsp.UserDetailVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,6 +21,8 @@ public interface UserMapper extends BaseMapper<User> {
     User selectUserByUsername(@Param("username") String username);
 
     List<User> selectAllUser4Redis();
+
+    UserDetailVO selectDetailById(Long id);
 }
 
 

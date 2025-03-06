@@ -27,6 +27,21 @@
         from user
         where is_delete=0
     </select>
+    
+    <select id="selectDetailById" resultType="cn.cotenite.bearing.domain.vo.rsp.UserDetailVO">
+        select
+            u.id,
+            u.username,
+            u.real_name,
+            u.role,
+            s.start_time,
+            s.get_off_time
+        from user u
+        left join worker_schedule ws on ws.worker_id=u.id
+        left join schedule s on s.id=ws.schedule_id
+        where u.id=#{id}
+        and s.is_delete=0
+    </select>
 
 
 </mapper>

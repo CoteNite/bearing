@@ -51,7 +51,7 @@ public class WordOrderServiceImpl extends ServiceImpl<WordOrderMapper, WordOrder
             if (size==0){
                 continue;
             }
-            Integer workerId =(Integer)redisTemplate.opsForSet().randomMember(RedisKeyUtil.buildUserWorkKey());
+            Long workerId =(Long)redisTemplate.opsForSet().randomMember(RedisKeyUtil.buildUserWorkKey());
             String wrongId=(String) entry.getKey();
             BearingStatusReqVO reqVO=(BearingStatusReqVO) entry.getValue();
             UserRedisDTO userRedisDTO = (UserRedisDTO) redisTemplate.opsForHash().get(RedisKeyUtil.buildUserHashKey(), workerId.toString());
