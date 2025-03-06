@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -21,19 +23,17 @@ public class Schedule implements Serializable {
     @TableId
     private Long id;
 
-    /**
-     * 
-     */
-    private Long workerId;
 
     /**
      * 
      */
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private LocalTime startTime;
 
     /**
      * 
      */
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private LocalTime getOffTime;
 
     /**
@@ -67,7 +67,6 @@ public class Schedule implements Serializable {
         }
         Schedule other = (Schedule) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getWorkerId() == null ? other.getWorkerId() == null : this.getWorkerId().equals(other.getWorkerId()))
             && (this.getStartTime() == null ? other.getStartTime() == null : this.getStartTime().equals(other.getStartTime()))
             && (this.getGetOffTime() == null ? other.getGetOffTime() == null : this.getGetOffTime().equals(other.getGetOffTime()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
@@ -80,7 +79,6 @@ public class Schedule implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getWorkerId() == null) ? 0 : getWorkerId().hashCode());
         result = prime * result + ((getStartTime() == null) ? 0 : getStartTime().hashCode());
         result = prime * result + ((getGetOffTime() == null) ? 0 : getGetOffTime().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
@@ -96,7 +94,6 @@ public class Schedule implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", workerId=").append(workerId);
         sb.append(", startTime=").append(startTime);
         sb.append(", getOffTime=").append(getOffTime);
         sb.append(", createTime=").append(createTime);
