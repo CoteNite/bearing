@@ -15,7 +15,7 @@ public enum ResponseErrorEnum {
     PARAM_NOT_VALID("400", "您传入的参数存在错误，请检查后重试"),
     USER_NOT_FOUND("400","用户未找到"),
     CAPTCHA_ERROR("400","验证码错误"),
-    AUTH_ERROR("400","登陆错误"),
+    AUTH_ERROR("401","登陆错误"),
     PASSWORD_OR_USERNAME_FAILURE("400","用户名或密码错误"),
     ROLE_ERROR("400","您当前的角色无权限进行该操作")
     ;
