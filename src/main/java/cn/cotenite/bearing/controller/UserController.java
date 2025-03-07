@@ -2,13 +2,16 @@ package cn.cotenite.bearing.controller;
 
 import cn.cotenite.bearing.common.response.Response;
 import cn.cotenite.bearing.domain.po.User;
+import cn.cotenite.bearing.domain.vo.req.PageReqVO;
 import cn.cotenite.bearing.domain.vo.req.UserAddReqVO;
 import cn.cotenite.bearing.domain.vo.req.UserUpdateReqVO;
+import cn.cotenite.bearing.domain.vo.rsp.PageRspVO;
 import cn.cotenite.bearing.domain.vo.rsp.UserDetailVO;
 import cn.cotenite.bearing.service.UserService;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.annotation.SaMode;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +47,12 @@ public class UserController {
     public Response<Void> updateUser(@RequestBody UserUpdateReqVO reqVO){
         userService.updateUser(reqVO);
         return Response.success();
+    }
+
+    @GetMapping("/list")
+    public Response<PageRspVO> list(@RequestParam PageReqVO reqVO){
+        PageRspVO rspVO=userService.getPage(reqVO);
+        return Response.success(rspVO);
     }
 
 }

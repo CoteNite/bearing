@@ -5,7 +5,9 @@ import cn.cotenite.bearing.common.enums.UserRoleEnum;
 import cn.cotenite.bearing.common.expection.BizException;
 import cn.cotenite.bearing.domain.dto.UserRedisDTO;
 import cn.cotenite.bearing.domain.po.WorkerSchedule;
+import cn.cotenite.bearing.domain.vo.req.PageReqVO;
 import cn.cotenite.bearing.domain.vo.req.UserUpdateReqVO;
+import cn.cotenite.bearing.domain.vo.rsp.PageRspVO;
 import cn.cotenite.bearing.domain.vo.rsp.UserDetailVO;
 import cn.cotenite.bearing.holder.UserRoleHolder;
 import cn.cotenite.bearing.domain.po.User;
@@ -15,6 +17,7 @@ import cn.cotenite.bearing.mapper.WorkerScheduleMapper;
 import cn.cotenite.bearing.service.UserService;
 import cn.cotenite.bearing.utils.RedisKeyUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import org.mindrot.jbcrypt.BCrypt;
@@ -106,6 +109,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
             userRedisDTOMap.put(item.getId().toString(),dto);
         }
         redisTemplate.opsForHash().putAll(RedisKeyUtil.buildUserHashKey(),userRedisDTOMap);
+    }
+
+    @Override
+    public PageRspVO<UserDetailVO> getPage(PageReqVO reqVO) {
+        Page<User> userPage =new Page<>(reqVO.getPageCurrent(),reqVO.getPageSize());
+        List<UserDetailVO> list= userMapper.selectDetailList(userPage);
+        return PageRspVO.<UserDetailVO>builder()
+                .dataList(list)
+                .pageSize(Long.valueOf(list.size()))
+                .pageCurrent(Long.valueOf(reqVO.getPageCurrent()))
+                .build();
+
     }
 
     private void updateWorkerSchedule(UserRoleEnum userRoleEnum, Long workId,Integer scheduleId) {

@@ -2,14 +2,20 @@ package cn.cotenite.bearing.service.impl;
 
 import cn.cotenite.bearing.common.enums.StatusEnum;
 import cn.cotenite.bearing.common.enums.WrongEnum;
+import cn.cotenite.bearing.domain.po.Bearing;
 import cn.cotenite.bearing.domain.po.BearingWrong;
 import cn.cotenite.bearing.domain.vo.req.BearingStatusReqVO;
+import cn.cotenite.bearing.domain.vo.req.BearingWrongFinishedVO;
 import cn.cotenite.bearing.domain.vo.req.PageReqVO;
+import cn.cotenite.bearing.domain.vo.rsp.BearingDetailVO;
 import cn.cotenite.bearing.domain.vo.rsp.BearingStatusRspVO;
+import cn.cotenite.bearing.domain.vo.rsp.BearingWrongDetailVO;
 import cn.cotenite.bearing.domain.vo.rsp.PageRspVO;
+import cn.cotenite.bearing.mapper.BearingMapper;
 import cn.cotenite.bearing.service.BearingWrongService;
 import cn.cotenite.bearing.utils.RedisKeyUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.cotenite.bearing.mapper.BearingWrongMapper;
@@ -33,6 +39,9 @@ public class BearingWrongServiceImpl extends ServiceImpl<BearingWrongMapper, Bea
     private BearingWrongMapper bearingWrongMapper;
 
     @Resource
+    private BearingMapper bearingMapper;
+
+    @Resource
     private RedisTemplate<String,Object> redisTemplate;
 
     @Override
@@ -41,6 +50,7 @@ public class BearingWrongServiceImpl extends ServiceImpl<BearingWrongMapper, Bea
         BeanUtils.copyProperties(reqVO, bearingWrong);
         bearingWrong.setStatus(StatusEnum.WAITING.getCode());
         bearingWrongMapper.insert(bearingWrong);
+        bearingMapper.update(Wrappers.<Bearing>update().set("status",1).eq("id",reqVO.getBearingId()));
         redisTemplate.opsForHash().put(RedisKeyUtil.buildBearingWrongKey(),bearingWrong.getId().toString(),reqVO);
     }
 
@@ -64,6 +74,21 @@ public class BearingWrongServiceImpl extends ServiceImpl<BearingWrongMapper, Bea
     public void updateStatus2Paring(Long wrongId) {
         bearingWrongMapper.updateStatusById(wrongId,StatusEnum.PARING.getCode());
     }
+
+    @Override
+    public void finished(BearingWrongFinishedVO reqVO) {
+        bearingWrongMapper.finished(reqVO.getBearingId());
+        redisTemplate.opsForSet().add(RedisKeyUtil.buildUserWorkKey(),reqVO.getUserId());
+    }
+
+    @Override
+    public List<BearingWrongDetailVO> getBearingDetailList(PageReqVO page) {
+        Page<BearingDetailVO> bearingDetailVOPage=new Page<>(page.getPageCurrent(), page.getPageSize());
+        return bearingWrongMapper.selectBearingDetail(bearingDetailVOPage);
+
+    }
+
+
 
 }
 

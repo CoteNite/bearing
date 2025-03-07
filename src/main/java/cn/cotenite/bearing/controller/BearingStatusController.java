@@ -2,6 +2,7 @@ package cn.cotenite.bearing.controller;
 
 import cn.cotenite.bearing.common.response.Response;
 import cn.cotenite.bearing.domain.vo.req.BearingStatusReqVO;
+import cn.cotenite.bearing.domain.vo.req.BearingWrongFinishedVO;
 import cn.cotenite.bearing.domain.vo.req.PageReqVO;
 import cn.cotenite.bearing.domain.vo.rsp.BearingStatusRspVO;
 import cn.cotenite.bearing.domain.vo.rsp.PageRspVO;
@@ -35,6 +36,13 @@ public class BearingStatusController {
     private Response<PageRspVO<?>> list(@Validated PageReqVO pageVO){
         PageRspVO<BearingStatusRspVO> pageRspVO = bearingWrongService.list(pageVO);
         return Response.success(pageRspVO);
+    }
+
+    @PostMapping("/finished")
+    @SaCheckLogin
+    private Response<Void> finished(@RequestBody BearingWrongFinishedVO reqVO){
+        bearingWrongService.finished(reqVO);
+        return Response.success();
     }
 
 }

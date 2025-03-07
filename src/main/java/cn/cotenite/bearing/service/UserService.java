@@ -1,8 +1,10 @@
 package cn.cotenite.bearing.service;
 
 import cn.cotenite.bearing.domain.po.User;
+import cn.cotenite.bearing.domain.vo.req.PageReqVO;
 import cn.cotenite.bearing.domain.vo.req.UserAddReqVO;
 import cn.cotenite.bearing.domain.vo.req.UserUpdateReqVO;
+import cn.cotenite.bearing.domain.vo.rsp.PageRspVO;
 import cn.cotenite.bearing.domain.vo.rsp.UserDetailVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -20,4 +22,6 @@ public interface UserService extends IService<User> {
     void updateUser(UserUpdateReqVO reqVO);
 
     void getAllUser4Redis();
+
+    PageRspVO getPage(PageReqVO reqVO);
 }

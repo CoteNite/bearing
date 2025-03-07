@@ -25,4 +25,24 @@
         set status=#{status}
         where id=#{id}
     </update>
+    
+    <update id="finished">
+        update bearing_wrong bw
+        join bearing b on b.id = bw.bearing_id
+        set bw.status=2,b.status=0
+        where bw.bearing_id=#{bearingId}
+        limit 1
+    </update>
+    
+    <select id="selectBearingDetail" resultType="cn.cotenite.bearing.domain.vo.rsp.BearingWrongDetailVO">
+        select
+            bw.id,
+            bw.bearing_id,
+            bw.status,
+            bw.wrong,
+            b.name bearingName,
+            bw.create_time
+        from  bearing_wrong bw
+        left join bearing b on bw.bearing_id = b.id
+    </select>
 </mapper>

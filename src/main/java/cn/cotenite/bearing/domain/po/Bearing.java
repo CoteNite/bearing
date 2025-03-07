@@ -1,56 +1,53 @@
 package cn.cotenite.bearing.domain.po;
 
-import com.baomidou.mybatisplus.annotation.*;
-
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
 /**
  * 
- * @TableName user
+ * @TableName bearing
  */
-@TableName(value ="user")
+@TableName(value ="bearing")
 @Data
-public class User implements Serializable {
+public class Bearing implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.ASSIGN_ID)
+    @TableId
     private Long id;
 
     /**
-     * 
+     * 0 正常 ，1出错
      */
-    private String username;
+    private Integer status;
 
     /**
      * 
      */
-    private String realName;
+    private String name;
 
     /**
-     *
+     * 
      */
-    private String password;
+    private Long createUser;
 
     /**
-     *
-     */
-    private Integer role;
-
-    /**
-     *
+     * 
      */
     private Date createTime;
 
     /**
-     *
+     * 
      */
     private Date updateTime;
 
     /**
-     *
+     * 
      */
     @TableLogic
     private Integer isDelete;
@@ -69,12 +66,11 @@ public class User implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        User other = (User) that;
+        Bearing other = (Bearing) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-            && (this.getRealName() == null ? other.getRealName() == null : this.getRealName().equals(other.getRealName()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-            && (this.getRole() == null ? other.getRole() == null : this.getRole().equals(other.getRole()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getIsDelete() == null ? other.getIsDelete() == null : this.getIsDelete().equals(other.getIsDelete()));
@@ -85,10 +81,9 @@ public class User implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getRealName() == null) ? 0 : getRealName().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
-        result = prime * result + ((getRole() == null) ? 0 : getRole().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getIsDelete() == null) ? 0 : getIsDelete().hashCode());
@@ -102,10 +97,9 @@ public class User implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
-        sb.append(", realName=").append(realName);
-        sb.append(", password=").append(password);
-        sb.append(", role=").append(role);
+        sb.append(", status=").append(status);
+        sb.append(", name=").append(name);
+        sb.append(", createUser=").append(createUser);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDelete=").append(isDelete);
