@@ -33,7 +33,7 @@ public class TimeUtil {
         LocalTime now = LocalTime.now();
         LocalTime end = LocalTime.parse(endTime, formatter);
         Duration duration = Duration.between(now, end);
-        return duration.getSeconds();
+        return Math.abs(duration.getSeconds());
     }
 
 

@@ -5,6 +5,7 @@ import cn.cotenite.bearing.utils.RedisKeyUtil;
 import cn.cotenite.bearing.utils.TimeUtil;
 import cn.cotenite.bearing.service.WorkerScheduleService;
 import cn.cotenite.bearing.mapper.WorkerScheduleMapper;
+import cn.hutool.core.collection.CollUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -37,12 +38,11 @@ public class WorkerScheduleServiceImpl implements WorkerScheduleService{
             workingWorkerList.add(aggregate.getWorkerId());
 
         }
-        if (!workingWorkerList.isEmpty()) {
+        if (!CollUtil.isEmpty(workingWorkerList)) {
             redisTemplate.opsForSet().add(
                     RedisKeyUtil.buildUserWorkKey(),
                     workingWorkerList.toArray(new Long[0])
             );
-
             if (workScheduleAggregates.get(0) != null) {
                 redisTemplate.expire(
                         RedisKeyUtil.buildUserWorkKey(),

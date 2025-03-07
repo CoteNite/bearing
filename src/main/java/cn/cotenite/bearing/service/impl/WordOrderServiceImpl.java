@@ -5,11 +5,13 @@ import cn.cotenite.bearing.domain.vo.req.BearingStatusReqVO;
 import cn.cotenite.bearing.service.BearingWrongService;
 import cn.cotenite.bearing.utils.RedisKeyUtil;
 import cn.cotenite.bearing.utils.SnowFlakUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.cotenite.bearing.domain.po.WordOrder;
 import cn.cotenite.bearing.service.WordOrderService;
 import cn.cotenite.bearing.mapper.WordOrderMapper;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ import java.util.Map;
 * @description 针对表【word_order】的数据库操作Service实现
 * @createDate 2025-03-02 06:06:16
 */
+@Slf4j
 @Service
 public class WordOrderServiceImpl extends ServiceImpl<WordOrderMapper, WordOrder> implements WordOrderService{
 
@@ -36,10 +39,13 @@ public class WordOrderServiceImpl extends ServiceImpl<WordOrderMapper, WordOrder
     @Override
     public void createOrder() {
         Boolean hasKey = redisTemplate.hasKey(RedisKeyUtil.buildBearingWrongKey());
+
         if (!hasKey){
             return;
         }
+
         Long mapSize = redisTemplate.opsForHash().size(RedisKeyUtil.buildBearingWrongKey());
+
         if(mapSize==0){
             return;
         }
@@ -48,25 +54,33 @@ public class WordOrderServiceImpl extends ServiceImpl<WordOrderMapper, WordOrder
 
         for (Map.Entry<Object, Object> entry:wrongMap.entrySet()){
             Long size = redisTemplate.opsForSet().size(RedisKeyUtil.buildUserWorkKey());
+
             if (size==0){
                 continue;
             }
-            Long workerId =(Long)redisTemplate.opsForSet().randomMember(RedisKeyUtil.buildUserWorkKey());
-            String wrongId=(String) entry.getKey();
-            BearingStatusReqVO reqVO=(BearingStatusReqVO) entry.getValue();
-            UserRedisDTO userRedisDTO = (UserRedisDTO) redisTemplate.opsForHash().get(RedisKeyUtil.buildUserHashKey(), workerId.toString());
 
-            WordOrder wordOrder = WordOrder.builder()
-                    .orderNumber(SnowFlakUtil.getSnowFlakeIdLong())
-                    .bearingId( reqVO.getBearingId())
-                    .wrong(reqVO.getWrong())
-                    .realName(userRedisDTO.getRealName())
-                    .build();
+            if(redisTemplate.hasKey(RedisKeyUtil.buildUserWorkKey())){
+                Long workerId=(Long)redisTemplate.opsForSet().pop(RedisKeyUtil.buildUserWorkKey());
+                redisTemplate.delete(RedisKeyUtil.buildUserWorkKey());
+                String wrongId=(String) entry.getKey();
+                BearingStatusReqVO reqVO=(BearingStatusReqVO) entry.getValue();
+                UserRedisDTO userRedisDTO = (UserRedisDTO) redisTemplate.opsForHash().get(RedisKeyUtil.buildUserHashKey(), workerId.toString());
 
-            wordOrderMapper.insert(wordOrder);
-            bearingWrongService.updateStatus2Paring(Long.valueOf(wrongId));
+                WordOrder wordOrder = WordOrder.builder()
+                        .orderNumber(SnowFlakUtil.getSnowFlakeIdLong())
+                        .bearingId( reqVO.getBearingId())
+                        .wrong(reqVO.getWrong())
+                        .realName(userRedisDTO.getRealName())
+                        .build();
 
-            redisTemplate.opsForHash().delete(RedisKeyUtil.buildBearingWrongKey(),wrongId);
+                wordOrderMapper.insert(wordOrder);
+                bearingWrongService.updateStatus2Paring(Long.valueOf(wrongId));
+
+                redisTemplate.opsForHash().delete(RedisKeyUtil.buildBearingWrongKey(),wrongId);
+                log.info("订单生成成功");
+            }else {
+                log.warn("当前无工人空闲");
+            }
         }
     }
 }

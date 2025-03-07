@@ -25,9 +25,11 @@
             s.start_time,
             s.get_off_time
         from worker_schedule ws
-                 left join schedule s on s.id=ws.schedule_id
+        left join schedule s on s.id=ws.schedule_id
+        left join user u on u.id=ws.worker_id
         where s.start_time &lt;= CURTIME()
         and s.get_off_time &gt;= CURTIME()
+        and u.role=2
     </select>
 
 
