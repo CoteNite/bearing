@@ -70,4 +70,11 @@ public class BearingController {
                 .build());
     }
 
+    @PostMapping("/delete")
+    @SaCheckRole(value = {"admin","superAdmin"},mode = SaMode.OR)
+    public Response<Void> deleteBearing(@Validated @RequestBody Long id){
+        bearingService.removeById(id);
+        return Response.success();
+    }
+
 }

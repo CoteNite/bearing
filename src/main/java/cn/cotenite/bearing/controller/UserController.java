@@ -55,4 +55,11 @@ public class UserController {
         return Response.success(rspVO);
     }
 
+    @PostMapping("/delete")
+    @SaCheckRole(value = {"admin","superAdmin"},mode = SaMode.OR)
+    public Response<Void> deleteUser(@Validated @RequestBody Long id){
+        userService.removeById(id);
+        return Response.success();
+    }
+
 }
