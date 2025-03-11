@@ -21,7 +21,7 @@ public class UserUpdateReqVO {
     @NotBlank
     private String id;
 
-    private String username;
+    private String userName;
 
     private String realName;
 

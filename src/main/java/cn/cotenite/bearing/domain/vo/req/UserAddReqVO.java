@@ -16,7 +16,7 @@ public class UserAddReqVO {
     private String id;
 
     @NotBlank
-    private String username;
+    private String userName;
 
     @NotBlank
     private String realName;
