@@ -3,6 +3,7 @@ package cn.cotenite.bearing.controller;
 import cn.cotenite.bearing.common.response.Response;
 
 import cn.cotenite.bearing.domain.po.Schedule;
+import cn.cotenite.bearing.domain.vo.req.IdReqVO;
 import cn.cotenite.bearing.domain.vo.req.ScheduleAddVO;
 import cn.cotenite.bearing.domain.vo.req.ScheduleUpdateVO;
 import cn.cotenite.bearing.domain.vo.rsp.ScheduleRspVO;
@@ -64,8 +65,8 @@ public class ScheduleController {
 
     @SaCheckRole(value = {"admin","superAdmin"},mode = SaMode.OR)
     @PostMapping("/delete")
-    public Response<Void> delete(@Validated @NotNull Long id){
-        scheduleService.removeById(id);
+    public Response<Void> delete(@Validated @NotNull IdReqVO idReqVO){
+        scheduleService.removeById(idReqVO.getId());
         return Response.success();
     }
 

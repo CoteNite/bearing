@@ -4,6 +4,7 @@ import cn.cotenite.bearing.common.response.Response;
 import cn.cotenite.bearing.domain.po.Bearing;
 import cn.cotenite.bearing.domain.vo.req.BearingAddVO;
 import cn.cotenite.bearing.domain.vo.req.BearingUpdateVO;
+import cn.cotenite.bearing.domain.vo.req.IdReqVO;
 import cn.cotenite.bearing.domain.vo.req.PageReqVO;
 import cn.cotenite.bearing.domain.vo.rsp.BearingDetailVO;
 import cn.cotenite.bearing.domain.vo.rsp.PageRspVO;
@@ -72,8 +73,8 @@ public class BearingController {
 
     @PostMapping("/delete")
     @SaCheckRole(value = {"admin","superAdmin"},mode = SaMode.OR)
-    public Response<Void> deleteBearing(@Validated @RequestBody Long id){
-        bearingService.removeById(id);
+    public Response<Void> deleteBearing(@Validated @RequestBody IdReqVO vo){
+        bearingService.removeById(vo.getId());
         return Response.success();
     }
 

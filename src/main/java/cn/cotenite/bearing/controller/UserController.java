@@ -2,6 +2,7 @@ package cn.cotenite.bearing.controller;
 
 import cn.cotenite.bearing.common.response.Response;
 import cn.cotenite.bearing.domain.po.User;
+import cn.cotenite.bearing.domain.vo.req.IdReqVO;
 import cn.cotenite.bearing.domain.vo.req.PageReqVO;
 import cn.cotenite.bearing.domain.vo.req.UserAddReqVO;
 import cn.cotenite.bearing.domain.vo.req.UserUpdateReqVO;
@@ -57,8 +58,8 @@ public class UserController {
 
     @PostMapping("/delete")
     @SaCheckRole(value = {"admin","superAdmin"},mode = SaMode.OR)
-    public Response<Void> deleteUser(@Validated @RequestBody Long id){
-        userService.removeById(id);
+    public Response<Void> deleteUser(@Validated @RequestBody IdReqVO vo){
+        userService.removeById(vo.getId());
         return Response.success();
     }
 
