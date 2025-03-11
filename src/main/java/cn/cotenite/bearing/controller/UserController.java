@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    public Response<PageRspVO> list(@RequestParam PageReqVO reqVO){
+    public Response<PageRspVO> list( PageReqVO reqVO){
         PageRspVO rspVO=userService.getPage(reqVO);
         return Response.success(rspVO);
     }

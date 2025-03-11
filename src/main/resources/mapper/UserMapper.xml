@@ -54,8 +54,7 @@
         from user u
                  left join worker_schedule ws on ws.worker_id=u.id
                  left join schedule s on s.id=ws.schedule_id
-        where u.id=#{id}
-        and s.is_delete=0
+        where  u.is_delete=0
     </select>
     
 

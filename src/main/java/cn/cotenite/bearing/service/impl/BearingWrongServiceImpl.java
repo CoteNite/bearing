@@ -23,6 +23,7 @@ import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +83,7 @@ public class BearingWrongServiceImpl extends ServiceImpl<BearingWrongMapper, Bea
     }
 
     @Override
-    public List<BearingWrongDetailVO> getBearingDetailList(PageReqVO page) {
+    public List<BearingWrongDetailVO> getBearingDetailList( PageReqVO page) {
         Page<BearingDetailVO> bearingDetailVOPage=new Page<>(page.getPageCurrent(), page.getPageSize());
         return bearingWrongMapper.selectBearingDetail(bearingDetailVOPage);
 
