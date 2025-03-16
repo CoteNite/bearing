@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class LoginRspVO {
 
+    private Long userId;
     private String nickname;
     private String role;
     private String token;

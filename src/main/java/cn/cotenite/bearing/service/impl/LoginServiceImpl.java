@@ -87,6 +87,7 @@ public class LoginServiceImpl extends ServiceImpl<UserMapper, User> implements L
         StpUtil.login(user.getId(),loginReqVO.getRememberMe());
 
         return LoginRspVO.builder()
+                .userId(user.getId())
                 .nickname(user.getRealName())
                 .role(userRole.getDocs())
                 .token(StpUtil.getTokenInfo().getTokenValue())

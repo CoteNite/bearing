@@ -12,8 +12,7 @@ class BearingApplicationTests {
     @Test
     void contextLoads() {
 
-
-
+        System.out.println(BCrypt.hashpw("admin", BCrypt.gensalt()));
 
 
     }
