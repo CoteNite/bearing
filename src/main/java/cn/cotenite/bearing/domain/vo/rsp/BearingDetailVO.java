@@ -25,7 +25,7 @@ public class BearingDetailVO {
 
     private String name;
 
-    private Long createUser;
+    private String realname;
 
     private LocalTime createTime;
 

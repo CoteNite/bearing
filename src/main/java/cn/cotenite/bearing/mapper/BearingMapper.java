@@ -1,6 +1,7 @@
 package cn.cotenite.bearing.mapper;
 
 import cn.cotenite.bearing.domain.po.Bearing;
+import cn.cotenite.bearing.domain.vo.rsp.BearingDetailVO;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -16,7 +17,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface BearingMapper extends BaseMapper<Bearing> {
 
-    Page<Bearing> selectPage4List(Page<Bearing> page, @Param("name") String name,@Param("status") Integer status);
+    Page<BearingDetailVO> selectPage4List(Page<Bearing> page, @Param("name") String name, @Param("status") Integer status);
 
 }
 

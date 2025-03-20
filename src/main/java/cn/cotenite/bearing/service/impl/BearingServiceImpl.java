@@ -1,5 +1,6 @@
 package cn.cotenite.bearing.service.impl;
 
+import cn.cotenite.bearing.domain.vo.rsp.BearingDetailVO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.cotenite.bearing.domain.po.Bearing;
@@ -20,7 +21,7 @@ public class BearingServiceImpl extends ServiceImpl<BearingMapper, Bearing> impl
     private BearingMapper bearingMapper;
 
     @Override
-    public Page<Bearing> getPage(Page<Bearing> page, String name, Integer status) {
+    public Page<BearingDetailVO> getPage(Page<Bearing> page, String name, Integer status) {
         return bearingMapper.selectPage4List(page,name,status);
     }
 }

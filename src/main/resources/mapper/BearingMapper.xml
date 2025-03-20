@@ -20,18 +20,23 @@
         is_delete
     </sql>
     
-    <select id="selectPage4List" resultType="cn.cotenite.bearing.domain.po.Bearing">
-        select
-        <include refid="Base_Column_List"/>
-        from bearing
+    <select id="selectPage4List" resultType="cn.cotenite.bearing.domain.vo.rsp.BearingDetailVO">
+        select b.id,
+               b.status,
+               b.name,
+               u.real_name realname,
+               b.create_time createTime,
+               b.update_time
+        from bearing b
+        left join user u on u.id=b.create_user
         <where>
             <if test="name!=null and name!=''">
-                and name like concat('%',#{name},'%')
+                and b.name like concat('%',#{name},'%')
             </if>
             <if test="status!=null">
-                and status=#{status}
+                and b.status=#{status}
             </if>
-            and is_delete=0
+            and b.is_delete=0
         </where>
     </select>
 </mapper>
