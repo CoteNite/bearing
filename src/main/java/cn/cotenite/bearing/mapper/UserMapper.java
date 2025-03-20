@@ -25,7 +25,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     UserDetailVO selectDetailById(Long id);
 
-    List<UserDetailVO> selectDetailList(Page<User> userPage);
+    List<UserDetailVO> selectDetailList(Page<User> userPage, @Param("realName") String realName,@Param("role") Integer role);
 }
 
 

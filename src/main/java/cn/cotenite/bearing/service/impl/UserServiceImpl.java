@@ -112,9 +112,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     }
 
     @Override
-    public PageRspVO<UserDetailVO> getPage(PageReqVO reqVO) {
+    public PageRspVO<UserDetailVO> getPage(PageReqVO reqVO, String realName, Integer role) {
         Page<User> userPage =new Page<>(reqVO.getPageCurrent(),reqVO.getPageSize());
-        List<UserDetailVO> list= userMapper.selectDetailList(userPage);
+        List<UserDetailVO> list= userMapper.selectDetailList(userPage,realName,role);
         return PageRspVO.<UserDetailVO>builder()
                 .dataList(list)
                 .pageSize(Long.valueOf(list.size()))

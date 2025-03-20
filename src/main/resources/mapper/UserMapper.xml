@@ -43,6 +43,7 @@
         and s.is_delete=0
         limit 1
     </select>
+    
     <select id="selectDetailList" resultType="cn.cotenite.bearing.domain.vo.rsp.UserDetailVO">
         select
             u.id,
@@ -54,7 +55,16 @@
         from user u
                  left join worker_schedule ws on ws.worker_id=u.id
                  left join schedule s on s.id=ws.schedule_id
-        where  u.is_delete=0
+        <where>
+            <if test="realName!=null and realName!=''">
+                and u.real_name like concat('%',#{realName},'%')
+            </if>
+            <if test="role!=null">
+                and u.role=#{role}
+            </if>
+            and u.is_delete=0
+        </where>
+        
     </select>
     
 

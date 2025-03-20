@@ -6,13 +6,8 @@ import cn.cotenite.bearing.domain.vo.rsp.CaptchaVO;
 import cn.cotenite.bearing.domain.vo.rsp.LoginRspVO;
 import cn.cotenite.bearing.service.LoginService;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 /**
  * @Author RichardYoung

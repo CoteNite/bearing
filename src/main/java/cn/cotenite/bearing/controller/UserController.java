@@ -51,8 +51,8 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    public Response<PageRspVO> list( PageReqVO reqVO){
-        PageRspVO rspVO=userService.getPage(reqVO);
+    public Response<PageRspVO> list( PageReqVO reqVO,String realName, Integer role){
+        PageRspVO rspVO=userService.getPage(reqVO,realName,role);
         return Response.success(rspVO);
     }
 

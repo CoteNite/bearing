@@ -53,7 +53,6 @@ public class BearingController {
 
     @GetMapping("/list")
     public Response<PageRspVO<BearingDetailVO>> list(PageReqVO reqVO){
-
         Page<Bearing> page=new Page<>(reqVO.getPageCurrent(), reqVO.getPageSize());
         page = bearingService.getPage(page);
         List<BearingDetailVO> list = page.getRecords()
@@ -77,5 +76,6 @@ public class BearingController {
         bearingService.removeById(vo.getId());
         return Response.success();
     }
+
 
 }

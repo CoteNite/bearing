@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
  * @Description
  * @Date 3/1/2025 9:07 PM
  */
-
 @RestController
 @RequestMapping("/bearingStatus")
 public class BearingStatusController {

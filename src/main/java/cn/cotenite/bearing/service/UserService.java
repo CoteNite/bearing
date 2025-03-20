@@ -23,5 +23,5 @@ public interface UserService extends IService<User> {
 
     void getAllUser4Redis();
 
-    PageRspVO getPage(PageReqVO reqVO);
+    PageRspVO getPage(PageReqVO reqVO, String realName, Integer role);
 }
