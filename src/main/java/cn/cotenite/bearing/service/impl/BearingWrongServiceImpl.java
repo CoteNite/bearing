@@ -84,7 +84,7 @@ public class BearingWrongServiceImpl extends ServiceImpl<BearingWrongMapper, Bea
     @Override
     public List<BearingWrongDetailVO> getBearingDetailList(PageReqVO page, String name, Integer status) {
         Page<BearingDetailVO> bearingDetailVOPage=new Page<>(page.getPageCurrent(), page.getPageSize());
-        return bearingWrongMapper.selectBearingDetail(bearingDetailVOPage);
+        return bearingWrongMapper.selectBearingDetail(bearingDetailVOPage,name, status);
 
     }
 

@@ -23,7 +23,7 @@ public interface BearingWrongMapper extends BaseMapper<BearingWrong> {
 
     void finished(@Param("bearingId")Long bearingId);
 
-    List<BearingWrongDetailVO> selectBearingDetail(Page<BearingDetailVO> bearingDetailVOPage);
+    List<BearingWrongDetailVO> selectBearingDetail(Page<BearingDetailVO> bearingDetailVOPage,@Param("name")String name,@Param("status") Integer status);
 
 }
 

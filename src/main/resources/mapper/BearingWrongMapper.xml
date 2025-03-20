@@ -44,5 +44,14 @@
             bw.create_time
         from  bearing_wrong bw
         left join bearing b on bw.bearing_id = b.id
+        <where>
+            <if test="name != null and name != ''">
+                b.name like concat('%',#{name},'%')
+            </if>
+            <if test="status != null">
+                and bw.status = #{status}
+            </if>
+            and bw.is_delete = 0
+        </where>
     </select>
 </mapper>

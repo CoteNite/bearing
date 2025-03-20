@@ -8,6 +8,7 @@ import cn.cotenite.bearing.domain.vo.rsp.BearingStatusRspVO;
 import cn.cotenite.bearing.domain.vo.rsp.BearingWrongDetailVO;
 import cn.cotenite.bearing.domain.vo.rsp.PageRspVO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,5 +29,5 @@ public interface BearingWrongService extends IService<BearingWrong> {
     void finished(BearingWrongFinishedVO reqVO);
 
 
-    List<BearingWrongDetailVO> getBearingDetailList(PageReqVO page, String name, Integer status);
+    List<BearingWrongDetailVO> getBearingDetailList(PageReqVO page, @Param("name")String name,@Param("status") Integer status);
 }
