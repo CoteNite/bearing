@@ -54,8 +54,8 @@ public class BearingController {
     @GetMapping("/list")
     public Response<PageRspVO<BearingDetailVO>> list(PageReqVO reqVO){
 
-        Page<Bearing> page=new Page<>(reqVO.getPageCurrent(), reqVO.getPageCurrent());
-        page = bearingService.page(page);
+        Page<Bearing> page=new Page<>(reqVO.getPageCurrent(), reqVO.getPageSize());
+        page = bearingService.getPage(page);
         List<BearingDetailVO> list = page.getRecords()
                 .stream()
                 .map(item -> {

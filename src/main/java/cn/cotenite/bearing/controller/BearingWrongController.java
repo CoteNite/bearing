@@ -32,6 +32,7 @@ public class BearingWrongController {
 
     @Resource
     private BearingWrongService bearingWrongService;
+
     @GetMapping("/list")
     public Response<PageRspVO<BearingWrongDetailVO>> list(PageReqVO reqVO){
         List<BearingWrongDetailVO> bearingDetailList = bearingWrongService.getBearingDetailList(reqVO);

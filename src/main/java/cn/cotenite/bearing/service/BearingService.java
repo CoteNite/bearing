@@ -1,6 +1,7 @@
 package cn.cotenite.bearing.service;
 
 import cn.cotenite.bearing.domain.po.Bearing;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -10,4 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface BearingService extends IService<Bearing> {
 
+    Page<Bearing> getPage(Page<Bearing> page);
 }
