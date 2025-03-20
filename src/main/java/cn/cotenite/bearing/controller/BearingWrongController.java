@@ -34,8 +34,8 @@ public class BearingWrongController {
     private BearingWrongService bearingWrongService;
 
     @GetMapping("/list")
-    public Response<PageRspVO<BearingWrongDetailVO>> list(PageReqVO reqVO){
-        List<BearingWrongDetailVO> bearingDetailList = bearingWrongService.getBearingDetailList(reqVO);
+    public Response<PageRspVO<BearingWrongDetailVO>> list(PageReqVO reqVO, String name, Integer status){
+        List<BearingWrongDetailVO> bearingDetailList = bearingWrongService.getBearingDetailList(reqVO, name, status);
         return Response.success(PageRspVO.<BearingWrongDetailVO>builder()
                         .pageSize(Long.valueOf(bearingDetailList.size()))
                         .dataList(bearingDetailList)
