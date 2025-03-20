@@ -2,10 +2,11 @@ package cn.cotenite.bearing.service.impl;
 
 import cn.cotenite.bearing.domain.dto.UserRedisDTO;
 import cn.cotenite.bearing.domain.vo.req.BearingStatusReqVO;
+import cn.cotenite.bearing.domain.vo.rsp.WorkOrderReqVO;
 import cn.cotenite.bearing.service.BearingWrongService;
 import cn.cotenite.bearing.utils.RedisKeyUtil;
 import cn.cotenite.bearing.utils.SnowFlakUtil;
-import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.cotenite.bearing.domain.po.WordOrder;
 import cn.cotenite.bearing.service.WordOrderService;
@@ -82,6 +83,11 @@ public class WordOrderServiceImpl extends ServiceImpl<WordOrderMapper, WordOrder
                 log.warn("当前无工人空闲");
             }
         }
+    }
+
+    @Override
+    public Page<WorkOrderReqVO> getList(Page<WorkOrderReqVO> page, Long id, String realName, Integer wrong, Integer status) {
+        return wordOrderMapper.selectPage4List(page,id,realName,wrong,status);
     }
 }
 

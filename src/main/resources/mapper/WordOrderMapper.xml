@@ -20,4 +20,35 @@
         real_name,create_time,update_time,
         is_delete
     </sql>
+    
+    <select id="selectPage4List" resultType="cn.cotenite.bearing.domain.vo.rsp.WorkOrderReqVO">
+        select
+            wo.id,
+            wo.order_number,
+            wo.bearing_id,
+            wo.real_name,
+            wo.wrong,
+            bw.status,
+            wo.create_time,
+            wo.update_time
+        from word_order wo
+        left join bearing_wrong bw on wo.bearing_id = bw.bearing_id
+        <where>
+            <if test="status != null">
+                and bw.status = #{status}
+            </if>
+            <if test="id != null">
+                and wo.id = #{id}
+            </if>
+            <if test="realName != null and realName != ''">
+                and wo.real_name like concat('%',#{realName},'%')
+            </if>
+            <if test="wrong != null">
+                and wo.wrong = #{wrong}
+            </if>
+            and bw.is_delete = 0
+        </where>
+     </select>
+
+
 </mapper>

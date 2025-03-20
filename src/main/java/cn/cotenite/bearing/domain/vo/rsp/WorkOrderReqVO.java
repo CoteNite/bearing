@@ -10,19 +10,19 @@ import java.time.LocalTime;
 /**
  * @Author RichardYoung
  * @Description
- * @Date 3/7/2025 7:31 PM
+ * @Date 2025/3/20 22:07
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BearingWrongDetailVO {
+public class WorkOrderReqVO {
 
     private Long id;
 
-    private Long bearingName;
+    private String orderNumber;
 
-    private Long bearingId;
+    private String bearingId;
 
     private Integer wrong;
 
@@ -30,5 +30,5 @@ public class BearingWrongDetailVO {
 
     private LocalTime createTime;
 
-
+    private LocalTime updateTime;
 }

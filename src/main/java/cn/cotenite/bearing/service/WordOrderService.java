@@ -1,6 +1,8 @@
 package cn.cotenite.bearing.service;
 
 import cn.cotenite.bearing.domain.po.WordOrder;
+import cn.cotenite.bearing.domain.vo.rsp.WorkOrderReqVO;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface WordOrderService extends IService<WordOrder> {
 
     void createOrder();
+
+    Page<WorkOrderReqVO> getList(Page<WorkOrderReqVO> page, Long id, String realName, Integer wrong, Integer status);
 }
