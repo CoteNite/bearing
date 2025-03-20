@@ -11,5 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface BearingService extends IService<Bearing> {
 
-    Page<Bearing> getPage(Page<Bearing> page);
+    Page<Bearing> getPage(Page<Bearing> page, String name, Integer status);
 }

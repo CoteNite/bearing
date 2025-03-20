@@ -19,4 +19,19 @@
         create_user,create_time,update_time,
         is_delete
     </sql>
+    
+    <select id="selectPage4List" resultType="cn.cotenite.bearing.domain.po.Bearing">
+        select
+        <include refid="Base_Column_List"/>
+        from bearing
+        <where>
+            <if test="name!=null and name!=''">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="status!=null">
+                and status=#{status}
+            </if>
+            and is_delete=0
+        </where>
+    </select>
 </mapper>

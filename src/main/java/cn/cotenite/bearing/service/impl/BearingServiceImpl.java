@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.cotenite.bearing.domain.po.Bearing;
 import cn.cotenite.bearing.service.BearingService;
 import cn.cotenite.bearing.mapper.BearingMapper;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,9 +16,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class BearingServiceImpl extends ServiceImpl<BearingMapper, Bearing> implements BearingService{
 
+    @Resource
+    private BearingMapper bearingMapper;
+
     @Override
-    public Page<Bearing> getPage(Page<Bearing> page) {
-        return null;
+    public Page<Bearing> getPage(Page<Bearing> page, String name, Integer status) {
+        return bearingMapper.selectPage4List(page,name,status);
     }
 }
 
