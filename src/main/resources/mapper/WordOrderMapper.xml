@@ -46,7 +46,7 @@
             <if test="wrong != null">
                 and wo.wrong = #{wrong}
             </if>
-            and bw.is_delete = 0
+            and wo.is_delete = 0
         </where>
      </select>
 
