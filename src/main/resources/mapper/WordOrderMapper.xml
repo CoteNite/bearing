@@ -26,7 +26,7 @@
             wo.id,
             wo.order_number,
             wo.bearing_id,
-            wo.real_name,
+            wo.real_name as userName,
             wo.wrong,
             bw.status,
             wo.create_time,

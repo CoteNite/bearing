@@ -28,6 +28,8 @@ public class WorkOrderReqVO {
 
     private Integer status;
 
+    private String userName;
+
     private LocalTime createTime;
 
     private LocalTime updateTime;
