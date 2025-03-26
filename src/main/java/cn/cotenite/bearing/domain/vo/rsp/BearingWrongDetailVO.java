@@ -20,7 +20,7 @@ public class BearingWrongDetailVO {
 
     private Long id;
 
-    private Long bearingName;
+    private String bearingName;
 
     private Long bearingId;
 
